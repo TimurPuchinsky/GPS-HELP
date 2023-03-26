@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activitys.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -17,41 +17,52 @@
 
         <Button
             android:id="@+id/b_profile"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/profile" />
+            android:text="@string/profile"
+            android:insetTop="0sp"
+            android:insetBottom="0sp"
+            app:cornerRadius="0sp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1sp" />
 
         <Button
             android:id="@+id/b_map"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/map" />
+            android:insetTop="0sp"
+            android:insetBottom="0sp"
+            android:text="@string/main"
+            app:cornerRadius="0sp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1sp" />
 
         <Button
             android:id="@+id/b_about"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/about" />
+            android:text="@string/about"
+            android:insetTop="0sp"
+            android:insetBottom="0sp"
+            app:cornerRadius="0sp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1sp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="517dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_height="583dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="48sp"
-        android:layout_height="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/stat_notify_sdcard_prepare" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,24 +17,42 @@
 
         <Button
             android:id="@+id/b_profile"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/profile" />
+            android:text="@string/profile"
+            android:insetTop="0sp"
+            android:insetBottom="0sp"
+            app:cornerRadius="0sp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1sp" />
 
         <Button
             android:id="@+id/b_map"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/map" />
+            android:insetTop="0sp"
+            android:insetBottom="0sp"
+            android:text="@string/main"
+            app:cornerRadius="0sp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1sp" />
 
         <Button
             android:id="@+id/b_about"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/about" />
+            android:text="@string/about"
+            android:insetTop="0sp"
+            android:insetBottom="0sp"
+            app:cornerRadius="0sp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1sp" />
     </LinearLayout>
 
     <com.google.android.gms.maps.MapView
