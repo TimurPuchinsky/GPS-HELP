@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "457422747393",
+    "project_id": "gps-help-6316d",
+    "storage_bucket": "gps-help-6316d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457422747393:android:c341d2209dfa43c06dcd00",
+        "android_client_info": {
+          "package_name": "com.example.gpshelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457422747393-l2o4tcc5g6nu8ncckm70iohgelk3ia1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV7LF90xJjhw_UCe1SuBAfl8rZMrJ9jSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457422747393-l2o4tcc5g6nu8ncckm70iohgelk3ia1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
