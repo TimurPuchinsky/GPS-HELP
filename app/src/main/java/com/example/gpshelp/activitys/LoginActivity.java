@@ -68,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Введите почту", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(LoginActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Введите пароль", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

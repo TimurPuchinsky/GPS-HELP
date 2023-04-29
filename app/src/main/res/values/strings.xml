@@ -5,10 +5,20 @@
     <string name="about">О ПРИЛОЖЕНИИ</string>
     <string name="main">ГЛАВНАЯ</string>
     <string name="settings">НАСТРОЙКИ</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="click_to_login">Click to login</string>
-    <string name="click_to_register">Click to register</string>
+    <string name="email">ЭЛ.ПОЧТА</string>
+    <string name="password">ПАРОЛЬ</string>
+    <string name="login">ВХОД</string>
+    <string name="register">РЕГИСТРАЦИЯ</string>
+    <string name="click_to_login">ВОЙТИ</string>
+    <string name="click_to_register">ЗАРЕГИСТРИРОВАТЬСЯ</string>
+    <string name="back">НАЗАД</string>
+    <string name="surname">ФАМИЛИЯ</string>
+    <string name="name">ИМЯ</string>
+    <string name="fname">ОТЧЕСТВО</string>
+    <string name="passport">ПАСПОРТ</string>
+    <string name="birthdate">ДАТА РОЖДЕНИЯ</string>
+    <string name="snils">СНИЛС</string>
+    <string name="liveplace">МЕСТО ПОСТОЯННОЙ ПРОПИСКИ</string>
+    <string name="workplace">АДРЕС ДИСПЕТЧЕРСКОГО ПУНКТА</string>
+    <string name="notalldata">Не все поля заполнены</string>
 </resources>
