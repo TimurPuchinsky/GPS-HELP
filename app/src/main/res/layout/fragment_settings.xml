@@ -11,8 +11,12 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="409dp"
-            android:layout_height="657dp"
+            android:layout_width="380dp"
+            android:layout_height="600dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -21,18 +25,23 @@
 
             <Switch
                 android:id="@+id/switch3"
+                style="@style/text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Switch" />
+                android:layout_height="52dp"
+                android:text="@string/themes"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-            <TextView
-                android:id="@+id/textView6"
+            <Switch
+                android:id="@+id/push"
+                style="@style/text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="52dp"
+                android:text="@string/push"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <TextView
                 android:id="@+id/textView9"
+                style="@style/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />

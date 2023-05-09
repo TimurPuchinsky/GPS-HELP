@@ -13,4 +13,20 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Light mode -->
+    <style name="screen">
+        <item name="android:background">#FFF</item>
+    </style>
+
+    <style name="text">
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="button">
+        <item name="android:textColor">#E01C1C</item>
+        <item name="android:strokeColor">@color/black</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
 </resources>
