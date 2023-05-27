@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Gpshelp"
         tools:targetApi="31">
         <activity
+            android:name=".activitys.CallinfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activitys.RegisterDataActivity"
             android:exported="false">
             <meta-data
