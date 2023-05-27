@@ -51,44 +51,59 @@ public class MainFragment extends Fragment {
             }
         });
 
-            database = FirebaseDatabase.getInstance();
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setApplicationId("1:603830706137:android:5322f2599256ab083f03c8")
-                    .setApiKey("AIzaSyAiLLz3Zmo2sBktNyxzI7GvTJWxRf22rH4")
-                    .setDatabaseUrl("https://gpshelp2-default-rtdb.firebaseio.com/")
-                    .build();
-            FirebaseApp.initializeApp(container.getContext(), options, "secondary");
-            app = FirebaseApp.getInstance("secondary");
-            secondaryDatabase = FirebaseDatabase.getInstance(app);
+        database = FirebaseDatabase.getInstance();
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setApplicationId("1:603830706137:android:5322f2599256ab083f03c8")
+                .setApiKey("AIzaSyAiLLz3Zmo2sBktNyxzI7GvTJWxRf22rH4")
+                .setDatabaseUrl("https://gpshelp2-default-rtdb.firebaseio.com/")
+                .build();
+        FirebaseApp.initializeApp(container.getContext(), options, "secondary");
+        app = FirebaseApp.getInstance("secondary");
+        secondaryDatabase = FirebaseDatabase.getInstance(app);
 
-            recyclerView = view.findViewById(R.id.callList);
-            databaseReference = secondaryDatabase.getReference("Calls");
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        recyclerView = view.findViewById(R.id.callList);
+        databaseReference = secondaryDatabase.getReference("Calls");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
-            list = new ArrayList<>();
-            myAdapter = new MyAdapter(container.getContext(), list);
-            recyclerView.setAdapter(myAdapter);
+        list = new ArrayList<>();
+        myAdapter = new MyAdapter(container.getContext(), list);
+        recyclerView.setAdapter(myAdapter);
 
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @SuppressLint("NotifyDataSetChanged")
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                        Call call = dataSnapshot.getValue(Call.class);
-                        list.add(call);
-                    }
-                    myAdapter.notifyDataSetChanged();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String id = dataSnapshot.getKey();
+                    Call call = dataSnapshot.getValue(Call.class);
+                    assert call != null;
+                    call.setId(id);
+                    list.add(call);
                 }
+                myAdapter.notifyDataSetChanged();
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+            }
+        });
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        app.delete();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        app.delete();
     }
 
     @Override

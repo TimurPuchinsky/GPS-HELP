@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.example.gpshelp.R;
-
 
 public class SettingsFragment extends Fragment {
 
@@ -33,7 +33,7 @@ public class SettingsFragment extends Fragment {
         sharedPreferences = requireContext().getSharedPreferences("MODE", Context.MODE_PRIVATE);
         nightmode = sharedPreferences.getBoolean("night", false);
 
-        if (nightmode){
+        if (nightmode) {
             switcher.setChecked(true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
@@ -41,7 +41,7 @@ public class SettingsFragment extends Fragment {
         switcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nightmode){
+                if (nightmode) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor = sharedPreferences.edit();
                     editor.putBoolean("night", false);
@@ -54,5 +54,9 @@ public class SettingsFragment extends Fragment {
             }
         });
         return view;
+    }
+    private void reset(){
+        SettingsFragment settingsFragment = new SettingsFragment();
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, settingsFragment).commit();
     }
 }
