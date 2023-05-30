@@ -24,6 +24,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 
 public class ProfileFragment extends Fragment {
 
@@ -38,9 +40,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        mainButton = view.findViewById(R.id.buttonRedact);
-        auth = FirebaseAuth.getInstance();
         button = view.findViewById(R.id.buttonChangeUser);
         tvEmail = view.findViewById(R.id.textViewEmail);
         tvSurname = view.findViewById(R.id.textViewFamily);
@@ -52,6 +51,10 @@ public class ProfileFragment extends Fragment {
         tvLiveplace = view.findViewById(R.id.textViewLiveplace);
         tvWorkplace = view.findViewById(R.id.textViewWorkplace);
 
+        //mainButton = view.findViewById(R.id.buttonRedact);
+
+        auth = FirebaseAuth.getInstance();
+
         user = auth.getCurrentUser();
         if (user == null){
             Intent i = new Intent(getActivity(), LoginActivity.class);
@@ -60,14 +63,12 @@ public class ProfileFragment extends Fragment {
         } else {
             db = FirebaseDatabase.getInstance();
             users = db.getReference("Users");
-
             users.child(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error getting data", task.getException());
-                    }
-                    else {
+                    } else {
                         tvSurname.setText(String.valueOf(task.getResult().child("surname").getValue()));
                         tvName.setText(String.valueOf(task.getResult().child("name").getValue()));
                         tvFname.setText(String.valueOf(task.getResult().child("fname").getValue()));
@@ -83,7 +84,6 @@ public class ProfileFragment extends Fragment {
             tvEmail.setText(user.getEmail());
         }
 
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,13 +94,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        mainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainFragment mainFragment = new MainFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, mainFragment).commit();
-            }
-        });
+//        mainButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MainFragment mainFragment = new MainFragment();
+//                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, mainFragment).commit();
+//            }
+//        });
         return view;
     }
 }

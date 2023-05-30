@@ -49,7 +49,8 @@
             android:insetTop="0sp"
             android:insetBottom="0sp"
             app:cornerRadius="0sp"
-            app:strokeWidth="1sp" />
+            app:strokeWidth="1sp"
+            android:textSize="12sp"/>
     </LinearLayout>
 
     <FrameLayout
