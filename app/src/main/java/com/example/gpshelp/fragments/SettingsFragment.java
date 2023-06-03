@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,23 +16,26 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.example.gpshelp.R;
-
-import java.util.Objects;
+import com.example.gpshelp.activitys.MainActivity;
 
 public class SettingsFragment extends Fragment {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    Switch switcher;
+    Switch switcher, pusher;
     boolean nightmode;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    MainFragment mainFragment;
+    MainActivity mainActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
         switcher = view.findViewById(R.id.switch3);
+        pusher = view.findViewById(R.id.push);
+        mainFragment = new MainFragment();
+        mainActivity = new MainActivity();
         sharedPreferences = requireContext().getSharedPreferences("MODE", Context.MODE_PRIVATE);
         nightmode = sharedPreferences.getBoolean("night", false);
 
@@ -42,25 +44,21 @@ public class SettingsFragment extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
-        switcher.setOnClickListener(new View.OnClickListener() {
+        switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (nightmode) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor = sharedPreferences.edit();
-                    editor.putBoolean("night", false);
-                } else {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     editor = sharedPreferences.edit();
                     editor.putBoolean("night", true);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor = sharedPreferences.edit();
+                    editor.putBoolean("night", false);
                 }
                 editor.apply();
             }
         });
         return view;
-    }
-    private void reset(){
-        SettingsFragment settingsFragment = new SettingsFragment();
-        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, settingsFragment).commit();
     }
 }

@@ -12,6 +12,7 @@ import com.example.gpshelp.R;
 import com.example.gpshelp.fragments.AboutFragment;
 import com.example.gpshelp.fragments.MainFragment;
 import com.example.gpshelp.fragments.ProfileFragment;
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,10 +1,14 @@
 package com.example.gpshelp.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +21,7 @@ import android.widget.ImageButton;
 import com.example.gpshelp.Call;
 import com.example.gpshelp.MyAdapter;
 import com.example.gpshelp.R;
+import com.example.gpshelp.activitys.MainActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +38,14 @@ public class MainFragment extends Fragment {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     FirebaseDatabase database, secondaryDatabase;
-    FirebaseApp app;
+    public FirebaseApp app;
     MyAdapter myAdapter;
     ArrayList<Call> list;
+    SettingsFragment settingsFragment;
+    NotificationManagerCompat notificationManagerCompat;
+    Notification notification;
+    MainActivity mainActivity;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,14 +62,20 @@ public class MainFragment extends Fragment {
             }
         });
 
+        mainActivity = new MainActivity();
         database = FirebaseDatabase.getInstance();
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setApplicationId("1:603830706137:android:5322f2599256ab083f03c8")
                 .setApiKey("AIzaSyAiLLz3Zmo2sBktNyxzI7GvTJWxRf22rH4")
                 .setDatabaseUrl("https://gpshelp2-default-rtdb.firebaseio.com/")
                 .build();
-        FirebaseApp.initializeApp(container.getContext(), options, "secondary");
-        app = FirebaseApp.getInstance("secondary");
+        try {
+            FirebaseApp.initializeApp(container.getContext(), options, "secondary");
+            app = FirebaseApp.getInstance("secondary");
+        } catch (IllegalStateException e){
+            app = FirebaseApp.getInstance("secondary");
+            e.getSuppressed();
+        }
         secondaryDatabase = FirebaseDatabase.getInstance(app);
 
         recyclerView = view.findViewById(R.id.callList);
@@ -84,6 +100,7 @@ public class MainFragment extends Fragment {
                     list.add(call);
                 }
                 myAdapter.notifyDataSetChanged();
+                //pushNotify();
             }
 
             @Override
@@ -95,21 +112,26 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        app.delete();
+    public void pushNotify() {
+        if (settingsFragment.pusher.isChecked()) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel("newCall", "newCall", NotificationManager.IMPORTANCE_DEFAULT);
+                NotificationManager manager = getContext().getSystemService(NotificationManager.class);
+                manager.createNotificationChannel(channel);
+            }
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "newCall")
+                    .setSmallIcon(android.R.drawable.btn_plus)
+                    .setContentTitle("Получен новый вызов!")
+                    .setContentText("Проверьте информацию.");
+            notification = builder.build();
+            notificationManagerCompat = NotificationManagerCompat.from(getContext());
+            push();
+        }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        app.delete();
+    @SuppressLint("MissingPermission")
+    public void push(){
+        notificationManagerCompat.notify(1, notification);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        app.delete();
-    }
 }

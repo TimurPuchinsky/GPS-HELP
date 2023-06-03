@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.gpshelp.R;
+import com.example.gpshelp.fragments.MainFragment;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +22,7 @@ public class CallinfoActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database, secondaryDatabase;
     FirebaseApp app;
+    MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class CallinfoActivity extends AppCompatActivity {
         t_address = findViewById(R.id.textViewAddress);
         t_info = findViewById(R.id.textViewInfo);
         b_delete = findViewById(R.id.delete);
+        mainFragment = new MainFragment();
 
         Intent intent = getIntent();
         String address = intent.getExtras().getString("address");
@@ -52,16 +55,14 @@ public class CallinfoActivity extends AppCompatActivity {
         b_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(app != null){
-                    app.delete(); }
                 database = FirebaseDatabase.getInstance();
                 FirebaseOptions options = new FirebaseOptions.Builder()
                         .setApplicationId("1:603830706137:android:5322f2599256ab083f03c8")
                         .setApiKey("AIzaSyAiLLz3Zmo2sBktNyxzI7GvTJWxRf22rH4")
                         .setDatabaseUrl("https://gpshelp2-default-rtdb.firebaseio.com/")
                         .build();
-                FirebaseApp.initializeApp(CallinfoActivity.this, options, "secondary");
-                app = FirebaseApp.getInstance("secondary");
+                FirebaseApp.initializeApp(CallinfoActivity.this, options, "third");
+                app = FirebaseApp.getInstance("third");
                 secondaryDatabase = FirebaseDatabase.getInstance(app);
 
                 databaseReference = secondaryDatabase.getReference("Calls");

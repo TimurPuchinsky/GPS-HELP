@@ -39,6 +39,7 @@
     <Button
         android:id="@+id/btn_register"
         android:text="@string/register"
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
@@ -46,6 +47,7 @@
 
     <TextView
         android:id="@+id/loginNow"
+        style="@style/text"
         android:text="@string/click_to_login"
         android:gravity="center"
         android:layout_width="match_parent"

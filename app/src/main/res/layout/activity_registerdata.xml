@@ -103,6 +103,7 @@
     <Button
         android:id="@+id/btn_register"
         android:text="@string/register"
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
@@ -112,6 +113,7 @@
     <TextView
         android:id="@+id/back"
         android:text="@string/back"
+        style="@style/text"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
